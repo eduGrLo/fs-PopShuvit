@@ -1,0 +1,27 @@
+. {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.gameGrid {
+  display: grid;
+  width: 500px;
+  height: 500px;
+  padding: 10px;
+  border:3px solid #BBD5DA;
+  border-radius: 5px;
+  background-color: #DFF1F1;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+  display: none;
+  background-color: #FF0000;
+  border: 1px dotted black;
+}
