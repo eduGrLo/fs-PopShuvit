@@ -21,7 +21,7 @@ body {
 }
 
 .cell {
-  display: none;
+  visibility: hidden;
   background-color: #FF0000;
   border: 1px dotted black;
 }
