@@ -1,7 +1,10 @@
 //aahh
 let grid = document.querySelector(".gameGrid");
-let pos = 50;
+let pos = 55;
+let posHist = [pos];	//historico de posicoes
+let sneki = document.querySelector(`#cell${pos}`);
 const mapSize = 100;
+let count = 2;
 
 for(let i = 0; i < mapSize; i++){
   const cell = document.createElement('div');
@@ -11,8 +14,6 @@ for(let i = 0; i < mapSize; i++){
 }
 
 document.addEventListener("keydown", (event) => {
-  let sneki = document.querySelector(`#cell${pos}`);
-
   switch(event.key){
     case 'w':
       pos -= 10;
@@ -30,6 +31,19 @@ document.addEventListener("keydown", (event) => {
       break;
   }
 
-  sneki = document.querySelector(`#cell${pos}`);
-  sneki.style.visibility = "visible";
+  posHist.push(pos);
+  if(posHist.length > count){
+    posHist.shift();
+  }
+
+  let cell = document.querySelectorAll(".cell");
+  cell.forEach((e) => {
+    e.style.visibility = "hidden";    //resetzin
+  });
+
+  for(let i = 0; i < count; i++){
+    sneki = document.querySelector(`#cell${posHist[i]}`);
+    sneki.style.visibility = "visible";
+  }
+
 });
