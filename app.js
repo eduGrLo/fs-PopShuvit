@@ -4,7 +4,9 @@ let pos = 55;
 let posHist = [pos];	//historico de posicoes
 let sneki = document.querySelector(`#cell${pos}`);
 const mapSize = 100;
-let count = 2;
+let count = 1;		//tamanho da cobrinha
+let posApple; 		//posicao da maca
+let apple;
 
 for(let i = 0; i < mapSize; i++){
   const cell = document.createElement('div');
@@ -12,6 +14,26 @@ for(let i = 0; i < mapSize; i++){
   cell.id = `cell${i}`;
   grid.appendChild(cell);
 }
+
+function createApple(posHist){
+  let pos = Math.trunc(Math.random() * 100);
+  let ok = true;
+
+  for(let i = 0; i < posHist.length; i++){
+    if(pos === posHist[i]){ ok = false; }
+  }
+
+  if(!ok){ return createApple; }
+
+  let apple = document.querySelector(`#cell${pos}`);
+  apple.style.visibility = "visible";
+  apple.style.backgroundColor = "#BBD5DA";
+
+
+  return pos;
+}
+
+posApple = createApple(posHist);
 
 document.addEventListener("keydown", (event) => {
   switch(event.key){
@@ -44,6 +66,15 @@ document.addEventListener("keydown", (event) => {
   for(let i = 0; i < count; i++){
     sneki = document.querySelector(`#cell${posHist[i]}`);
     sneki.style.visibility = "visible";
+  }
+
+  document.querySelector(`#cell${posApple}`).style.visibility = "visible";
+
+  if(pos === posApple){
+    sneki.style.backgroundColor = "#FF0000";
+    count += 1;
+
+    posApple = createApple(posHist);
   }
 
 });
